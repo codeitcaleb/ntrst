@@ -1,0 +1,23 @@
+<h2>Upload a Photo</h2>
+
+<%= form_for @photo do |f| %>
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+
+  <%= f.label :caption %>
+  <%= f.text_area :caption %>
+
+  <%= f.fields_for :location do |location| %>
+      <%= location.label :location %>
+      <%= location.text_field :location %>
+  <% end %>
+
+  <%= f.fields_for :tag do |tag| %>
+      <%= tag.label :title %>
+      <%= tag.text_field :tag %>
+  <% end %>
+
+  <%= f.submit %>
+
+<% end %>
+

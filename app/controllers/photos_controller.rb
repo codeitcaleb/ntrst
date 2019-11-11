@@ -4,7 +4,8 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(id: params[:id])
+    
+    @photo = Photo.find(params[:id])
   end
 
   def new
@@ -12,8 +13,8 @@ class PhotosController < ApplicationController
   end
 
   def create
-    photo = Photo.create(photo_params)
-    redirect_to photo
+    @photo = Photo.create(photo_params)
+    redirect_to photos_path(@photo)
   end
 
   def edit
@@ -23,5 +24,14 @@ class PhotosController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def photo_params
+    params.require(:photo).permit(:image, :caption, 
+    locations_attributes: [:location],
+    tags_attributes: [:title]
+    )
   end
 end

@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :omniauthable
+  
   has_many :photos
   
   has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Follow'
@@ -8,9 +11,6 @@ class User < ApplicationRecord
 
   has_many :follower_relationships, foreign_key: 'follower_id', class_name: 'Follow'
   has_many :followers, through: :follower_relationships, source: :following
-  
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
