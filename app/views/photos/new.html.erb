@@ -7,12 +7,12 @@
   <%= f.label :caption %>
   <%= f.text_area :caption %>
 
-  <%= f.fields_for :location do |location| %>
+  <%= f.fields_for :locations do |location| %>
       <%= location.label :location %>
       <%= location.text_field :location %>
   <% end %>
 
-  <%= f.fields_for :tag do |tag| %>
+  <%= f.fields_for :tags do |tag| %>
       <%= tag.label :title %>
       <%= tag.text_field :tag %>
   <% end %>
